@@ -161,13 +161,13 @@ We're going to want to check for these peaks when we analyze the time-series plo
 
 ggmap(northMap, extent = 'device', legend = "bottomright")+
   contours1 + scale_alpha_continuous(range = c(0.25, 0.4), guide = "none")+
-  scale_fill_gradient('Violent\nCrime\nDensity') + facet_wrap(~Day) + ggtitle("North Campus")
+  scale_fill_gradient('Crime\nDensity') + facet_wrap(~Day) + ggtitle("North Campus")
 
 
 
 ggmap(southMap, extent = 'device', legend = "bottomright")+
   contours2 + scale_alpha_continuous(range = c(0.25, 0.4), guide = "none")+
-  scale_fill_gradient('Violent\nCrime\nDensity')+ facet_wrap(~Day) + ggtitle("South Campus")
+  scale_fill_gradient('Crime\nDensity')+ facet_wrap(~Day) + ggtitle("South Campus")
 
 
 ```
@@ -201,7 +201,7 @@ ggplot(dat, aes(x=Offense, y=Count))+
 
 ```
 
-Looks like mostly non-violent crimes, and a few police codes that we'll have to ask about. Also seems there may be some overlap in the crime factors so we should be able to consolidate some of them. Here's another way to visualize the type of crimes being reported.
+Looks like mostly non-violent crimes, and a few police codes that we'll have to ask about. Also seems there may be some overlap in the offense levels so we should be able to consolidate some of them. Here's another way to visualize the type of crimes being reported.
 
 ```{r message= FALSE, warning=FALSE}
 pal <- brewer.pal(8,"Dark2")
@@ -340,6 +340,8 @@ ggplot(dat, aes(x = Year, y =n, fill = Year))+
   ggtitle("Yearly Violin Plot")
 ```
 
+2015 is the only year where we don't have a bimodal distribution. We expect the bimodal peaks to come from Summer and Winter breaks.
+
 Let's look at the monthly time-series data along with the most common crimes. Note that the plot below is interactive and let's you zoom in, so feel free to explore!
 
 
@@ -409,7 +411,7 @@ ggplotly(p)
 
 ```
 
-As expected, the number of reported crimes tends to peak during the Fall and Spring semesters. We also see some high variations in the Spring semester. To find out why we'll have to categorize our crimes. 
+As expected, the number of reported crimes tends to peak during the Fall and Spring semesters. We also see some high variations in the Spring semester that we'll need to look into.
 
 Until then we can do a bit more work with our time-series plots. 
 
@@ -426,7 +428,7 @@ title(main = "Moving Average with Order 12")
 
 ```
 
-It looks like there was a small peak around Fall of 2014 before dipping back to arround 120 crimes per month. Overall not a large trend.
+It looks like there was a small peak around Fall of 2014 before dipping back to around 120 crimes per month.
 
 We want to be able to isolate the seasonal variations from any other trends that may be hidden. We'll do so by decomposing the time-series to get the non-seasonal data.
 
